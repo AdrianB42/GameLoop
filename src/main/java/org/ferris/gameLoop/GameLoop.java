@@ -9,6 +9,8 @@ public final class GameLoop extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerEventListener(), this);
 
         getCommand("gameloop").setExecutor(new GameloopCommand());
+
+        GameSessionManager.initialize(this);
     }
 
     @Override
