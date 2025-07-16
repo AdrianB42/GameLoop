@@ -1,0 +1,12 @@
+name: GameLoop
+version: '1.0-SNAPSHOT'
+main: org.ferris.gameLoop.GameLoop
+api-version: '1.21'
+
+commands:
+  gameloop:
+    description: "Testing"
+    usage: "/gameloop <args>"
+    aliases: [ gl ]
+    permission: gameloop.command.gameloop
+    permission-message: "You do not have permission to use this command"
