@@ -1,9 +1,11 @@
 name: GameLoop
-version: '1.0-SNAPSHOT'
+version: '1.0'
 main: org.ferris.gameLoop.GameLoop
-api-version: '1.21'
+api-version: '1.21.7'
 
+#List of commands that can be used in game.
 commands:
+  #The "/gameloop" command (also has the alias of "/gl").
   gameloop:
     description: "Testing"
     usage: "/gameloop <args>"

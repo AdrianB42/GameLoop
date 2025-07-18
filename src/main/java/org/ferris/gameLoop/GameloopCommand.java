@@ -36,6 +36,10 @@ public class GameloopCommand implements CommandExecutor, TabExecutor {
 
         if (strings.length >= 1) {
             switch (strings[0].toLowerCase()) {
+                /*
+                "/gameloop start" is not intended to have an actual use, instead it just exists as a way to test the plugin.
+                Starting a game will instead be handled in GameSessionManager.initialize().
+                 */
                 case "start":
                     ArrayList<UUID> playersNotInSession = PlayerEventListener.playersNotInSession;
                     if (!playersNotInSession.isEmpty()) {
@@ -52,6 +56,10 @@ public class GameloopCommand implements CommandExecutor, TabExecutor {
                     }
                     return true;
 
+                /*
+                "/gameloop stop" is not intended to have an actual use, instead it just exists as a way to test the plugin.
+                Stopping a game will instead be handled by the PlayerEventListener.
+                 */
                 case "stop":
                     if (strings.length == 1) {
                         player.sendMessage("Ongoing Session UUIDs: " + GameSessionManager.gameSessions());
@@ -67,6 +75,9 @@ public class GameloopCommand implements CommandExecutor, TabExecutor {
                     }
                     return true;
 
+                /*
+                "/gameloop list" just returns the currently ongoing gameSessions, listing their UUID, status, and player count.
+                 */
                 case "list":
                     for (UUID x : GameSessionManager.gameSessions()) {
                         GameSession session = GameSessionManager.getSession(x);
@@ -74,6 +85,10 @@ public class GameloopCommand implements CommandExecutor, TabExecutor {
                     }
                     return true;
 
+                /*
+                "/gameloop join" is how players will join an ongoing gameSession.
+                Players don't have to type in the message themselves, as the prompt they receive in chat to join a session runs the command for them.
+                 */
                 case "join":
                     if (strings.length == 1) {
                         player.sendMessage("Ongoing Session UUIDs: " + GameSessionManager.gameSessions());
@@ -93,6 +108,9 @@ public class GameloopCommand implements CommandExecutor, TabExecutor {
                     }
                     return true;
 
+                /*
+                "/gameloop quit" is how players will quit a gameSession, if they are in one.
+                 */
                 case "quit":
                     GameSession session = GameSessionManager.getSessionByPlayer(player.getUniqueId());
                     if (session != null) {
