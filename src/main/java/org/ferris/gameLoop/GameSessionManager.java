@@ -12,7 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+
+/*
+The GameSessionManager is probably the most important part of this whole plugin, as it handles the creation of each minigame session.
+ */
 public class GameSessionManager {
+
+    /*
+    The game sessions are stored in a hashmap of gameSession UUIDs that points to each gameSession.
+     */
     private static final Map<UUID, GameSession> sessions = new HashMap<>();
 
     public static void addSession(UUID uuid, GameSession gameSession) {

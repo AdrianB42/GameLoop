@@ -13,7 +13,20 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/*
+This class handles the logic for the "/gameloop" command.
+The name of the class (GameloopCommand.java) is arbitrary however it should reflect whatever command it is tied to.
+On top of also handling the logic for the "/gameloop" command, it also handles the autocomplete feature when typing in "/gameloop" in game.
+ */
 public class GameloopCommand implements CommandExecutor, TabExecutor {
+
+    /*
+    onCommand() handles the logic for what should happen when "/gameloop" is run.
+    commandSender -> Whatever sent the command (could be the server, player, etc...)
+    command -> The name of the command being run. If you're using separate classes for each command (as you should to make your code neater), this becomes practically useless.
+    s -> Honestly idk, so you probably don't need to use it unless you know how to.
+    strings -> The list of arguments succeeding the main command (aka in "/gameloop start", "start" would be the first argument).
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         if (!(commandSender instanceof Player player)) {
@@ -57,7 +70,7 @@ public class GameloopCommand implements CommandExecutor, TabExecutor {
                 case "list":
                     for (UUID x : GameSessionManager.gameSessions()) {
                         GameSession session = GameSessionManager.getSession(x);
-                        player.sendMessage("UUID: " + x + " Status: " + session.status + "Players: " + session.players.size());
+                        player.sendMessage("UUID: " + x + "     Status: " + session.status + "     Players: " + session.players.size());
                     }
                     return true;
 
@@ -95,10 +108,19 @@ public class GameloopCommand implements CommandExecutor, TabExecutor {
         return false;
     }
 
+    /*
+    onTabComplete() handles what should happen when a player who's typing a command into chat presses the tab key to autocomplete their command.
+    The autocomplete suggestions are given to the player via a list of strings.
+    commandSender -> Whatever sent the command (could be the server, player, etc...)
+    command -> The name of the command being run. If you're using separate classes for each command (as you should to make your code neater), this becomes practically useless.
+    s -> Honestly idk, so you probably don't need to use it unless you know how to.
+    strings -> The list of arguments succeeding the main command (aka in "/gameloop start", "start" would be the first argument).
+     */
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         if (strings.length == 1) {
-            return List.of("start", "stop", "list", "join", "quit");
+            return List.of("start",
+                    "stop", "list", "join", "quit");
         }
         if (strings.length == 2 && strings[0].equalsIgnoreCase("stop") || strings[0].equalsIgnoreCase("join")) {
             return GameSessionManager.gameSessions().stream().map(UUID::toString).collect(Collectors.toList());

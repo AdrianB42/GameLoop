@@ -3,6 +3,10 @@ package org.ferris.gameLoop;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/*
+This is where the actual minigame logic would go.
+Currently, it just has the necessary functions to initialize a minigame session, although no gameplay has actually been coded.
+ */
 public class GameSession {
     public int worldBorderSize;
     public ArrayList<UUID> players;
